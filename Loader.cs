@@ -8,5 +8,6 @@ namespace SmartLogisticsDelieverySystem
 {
     internal class Loader
     {
+
     }
 }
