@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace SmartLogisticsDelieverySystem
 {
-     public interface IQueuable<T>
+     interface IFileHanlder
     {
-        void Enqueue(T item);
-        T Dequeue();
-        T Peek();
+        void Save(string path);
+        void Load(string path);
 
-        bool IsEmpty();
     }
 }

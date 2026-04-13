@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace SmartLogisticsDelieverySystem
 {
-     public interface IQueuable<T>
+     interface ISortable
     {
-        void Enqueue(T item);
-        T Dequeue();
-        T Peek();
-
-        bool IsEmpty();
+        void Sort();
     }
 }

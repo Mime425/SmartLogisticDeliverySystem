@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartLogisticsDelieverySystem
 {
-    abstract class Vehicle : Entity
+    public abstract class Vehicle : Entity
     {
 
         private double speed;

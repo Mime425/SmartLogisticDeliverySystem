@@ -2,7 +2,7 @@
 
 namespace SmartLogisticsDelieverySystem
 {
-    abstract class Worker : Entity
+    public abstract class Worker : Entity
     {
         private int experienceYears;
         private int taskCompleted;

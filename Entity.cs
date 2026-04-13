@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartLogisticsDelieverySystem
 {
-    abstract class Entity
+    public abstract class Entity
     {
         private int id;
         private string name;
