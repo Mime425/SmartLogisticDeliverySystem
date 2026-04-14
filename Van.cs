@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartLogisticsDelieverySystem
 {
-     abstract class Van : Vehicle
+     public abstract class Van : Vehicle
     {
         //attributes 
         private bool isElectric;

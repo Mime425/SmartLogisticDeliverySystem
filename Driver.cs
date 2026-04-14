@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace SmartLogisticsDelieverySystem
 {
-     abstract class Driver : Worker
+     public abstract  class Driver : Worker
     {
         private string licenseType;
 

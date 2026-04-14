@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace SmartLogisticsDelieverySystem
 {
-     abstract class Loader : Worker
+    public  abstract class Loader : Worker
     {
         private double maxLiftWeight;
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OOPproject
 {
-    abstract class Vehicle : Entity
+  public  abstract class Vehicle : Entity
     {
         private double speed;
         private double maxCapacity;

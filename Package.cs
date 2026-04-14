@@ -1,7 +1,10 @@
 ﻿namespace SmartLogisticsDelieverySystem
 {
-    public abstract class Package
+    public class Package
+
     {
+
+
         public double weight { get; set; }
         public int id { get; set; }
         public int priorityLevel { get; set; }
@@ -15,6 +18,11 @@
             this.priorityLevel = Math.Clamp(priorityLevel, 1, 5);
             this.destination = destination;
             this.status = "Pending";
+        }
+
+        public Package(int id)
+        {
+            this.id = id;
         }
 
         public double CalculatePriorityScore()

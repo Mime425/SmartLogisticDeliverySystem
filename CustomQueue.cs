@@ -69,7 +69,9 @@ namespace SmartLogisticsDelieverySystem
         }
 
         public bool IsEmpty()
-            { return count == 0; }
+        { 
+            return count == 0;
+        }
     }
 }
 
