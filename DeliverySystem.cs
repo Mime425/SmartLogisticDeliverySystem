@@ -101,7 +101,7 @@ namespace SmartLogisticsDelieverySystem
 
         public void RunSimulation()
         {
-            Console.WriteLine("Running delivery simulation...");
+            Console.WriteLine("Running delivery simulation");
             SortPackage();
             ProcessDeliveries();
             Console.WriteLine("Simulation completed.");
