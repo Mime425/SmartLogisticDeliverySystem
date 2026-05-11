@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartLogisticsDelieverySystem
 {
+    //Custom Stack
     public class CustomStack<T>
     {
         private T[] arr;
@@ -18,33 +19,34 @@ namespace SmartLogisticsDelieverySystem
 
         {
             capacity = size;
-            arr = new T[capacity];
-            top = -1;
+            arr = new T[capacity]; // new array is created
+            top = -1;  // the stack is empty
         }
 
         // methods for stack
-        //Push
+        //Push, which adds the item on top of the stack
 
         public void Push(T value)
 
         {
 
-            if (top == capacity - 1)
+            if (top == capacity - 1) // check if stack is full
 
             {
 
-                Console.WriteLine("Stack os full");
+                Console.WriteLine("Stack is full");
 
                 return;
 
             }
-            top++;
-            arr[top] = value;
+            top++;                 // we move to the next postion 
+            arr[top] = value;    // and here we put the value
 
         }
 
 
         //Pop
+        // removes and returns the top element 
         public T Pop()
         {
             if (IsEmpty())
@@ -53,7 +55,7 @@ namespace SmartLogisticsDelieverySystem
                 Console.WriteLine("Stack is empty");
                 return default(T);
             }
-            T value = arr[top];
+            T value = arr[top];  //gets top value 
             top--;
 
             return value;
@@ -61,6 +63,7 @@ namespace SmartLogisticsDelieverySystem
 
 
         //Peek
+        //this returns top item without removing it 
         public T Peek()
         {
             if (IsEmpty())

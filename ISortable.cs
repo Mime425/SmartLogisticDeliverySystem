@@ -8,6 +8,7 @@ namespace SmartLogisticsDelieverySystem
 {
      interface ISortable
     {
+        //method to sort data
         void Sort();
     }
 }

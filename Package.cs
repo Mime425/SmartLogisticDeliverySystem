@@ -3,8 +3,6 @@
     public class Package
 
     {
-
-
         public double weight { get; set; }
         public int id { get; set; }
         public int priorityLevel { get; set; }

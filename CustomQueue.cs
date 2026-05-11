@@ -10,7 +10,7 @@ namespace SmartLogisticsDelieverySystem
     public class CustomQueue<T> : IQueuable<T>
     {
         private T[] myarray;
-        private int count;
+        private int count; // num of elements in queue
 
 
         //constructor 
@@ -18,6 +18,7 @@ namespace SmartLogisticsDelieverySystem
         {
             if (capacity <= 0)
 
+                //checks if the capacity is greater than 0
                 throw new ArgumentException("Capacity must be greater than zero.");
 
             myarray = new T[capacity];
@@ -27,6 +28,8 @@ namespace SmartLogisticsDelieverySystem
 
         //enqueue
         //[n1,n2,n3]
+        //enqueue adds the item in the next empty position  
+        //which increases the count
         public void Enqueue(T item)
         {
             //check if the array is full
@@ -37,36 +40,40 @@ namespace SmartLogisticsDelieverySystem
                 return;
 
             }
-            myarray[count] = item;
-            count++;
+            myarray[count] = item; // adds item at the next position
+            count++; // increase num of elements
         }
 
 
         //[n1,n2,n3] = > Dequeue() => n1 => [null,n2,n3]
+        //removes first item from Queue
         public T Dequeue()
         {
             if (count == 0)
             {
                 throw new Exception("Queue is empty. Cannot dequeue item.");
             }
-            T item = myarray[0];
+            T item = myarray[0]; // this gets first item
             //shift all the elements
             for (int i = 1; i < count; i++)
             {
-                myarray[i - 1] = myarray[i];
+                myarray[i - 1] = myarray[i];  //moves every item 1 position on left
             }
             myarray[count - 1] = default(T);   //Clear the last element
-            count--;
+            count--;           
             return item;
         }
+
+        //this takes at the first element without removing it
         public T Peek()
         {
             if (count == 0)
             {
                 throw new Exception("Queue is empty. Cannot peek item.");
             }
-            return myarray[0];
+            return myarray[0]; // element at position 0
         }
+
 
         public bool IsEmpty()
         { 

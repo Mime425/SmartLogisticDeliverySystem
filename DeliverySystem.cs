@@ -13,11 +13,14 @@ namespace SmartLogisticsDelieverySystem
         //for package waiting system 
         private CustomQueue<Package> waitingPackages = new CustomQueue<Package>(20);
         //package undo 
-        private CustomStack<Package> undoPackages = new CustomStack<Package>(20);
+        private CustomStack<Package> undoPackages = new CustomStack<Package>(20); 
+        //20 is max amount that waiting and undo packages can store
 
+
+        //this adds warehouse to the system
         public void AddWarehouse(Warehouse w)
         {
-            warehouses.Add(w);
+            warehouses.Add(w);  //this adds warehouse to list
         }
         
         //methods for package waiting system from the customQueue<T> 
@@ -25,17 +28,19 @@ namespace SmartLogisticsDelieverySystem
         //for package waiting syytem
         public void AddPackage(Package p)
         {
-            packages.Add(p);
+            packages.Add(p); // this adds package to the list of all packages in system
             waitingPackages.Enqueue(p); //add pkg enqueue
-            undoPackages.Push(p); // this saves for unto in custom stack
+            undoPackages.Push(p); // this saves for undo in custom stack
         }
 
+        //next package to deliever
         public Package NextPackage()
         {
             return waitingPackages.Dequeue(); //gets next package
            
         }
 
+        //sees the next package without removing it 
         public Package PeekNextPackage()
         {
             return waitingPackages.Peek(); // peek sees package
@@ -61,7 +66,7 @@ namespace SmartLogisticsDelieverySystem
 
         }
 
-        public Package SearchPackageId(int id)
+        public Package SearchPackageId(int id) 
         {
             foreach (Package package in packages)
             {
@@ -88,27 +93,29 @@ namespace SmartLogisticsDelieverySystem
             }
         }
 
+        //method that processes all packes
+        // that are in waiting queue
         public void ProcessDeliveries()
         {
             while (waitingPackages.IsEmpty())
             {
-               Package p = waitingPackages.Dequeue(); 
+               Package p = waitingPackages.Dequeue();  // this takes the next package in the queue
                 
 
             }
             Console.WriteLine("Processing delivery packages");
         }
 
+        //this method runs the full delievery simulation
         public void RunSimulation()
         {
             Console.WriteLine("Running delivery simulation");
-            SortPackage();
-            ProcessDeliveries();
+            SortPackage();                  //sorts package
+            ProcessDeliveries();               //processes deliveries 
             Console.WriteLine("Simulation completed.");
 
-
         }
-        //
+        //methods created while trying to run our main
         internal void SearchPackageId()
         {
             throw new NotImplementedException();

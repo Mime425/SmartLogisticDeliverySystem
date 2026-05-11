@@ -18,7 +18,8 @@ namespace SmartLogisticsDelieverySystem
 
         }
 
-        //Deliever 
+        //Method exists in Vehicle
+        //So we want the Van to have its own way of delivering 
         public override void Deliver(List<Package> packages)
         {
 

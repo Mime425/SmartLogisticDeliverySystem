@@ -22,24 +22,27 @@ namespace SmartLogisticsDelieverySystem
 
         //Methods
 
-        //Deliver method
+        //Deliver packages using drone, and its only small delievry 
         public override void Deliver(List<Package> packages)
         {
 
             Console.WriteLine("The drone is delivering packages");
             
 
+            // loops through all packages
             for (int i = 0; i < packages.Count;
               i++)
             {
-
+                //makes number start from 0 and not 1
                 int num = i +  1;
                 Console.WriteLine("Package" + num + "is being delivered");
             }
             Console.WriteLine("The drone delivered all the packages");
 
             //Condition
+            //handles packages smaller or =5
             if (smallPackages <= 5)
+
             {
                 Console.WriteLine("Package is being delivered by the drone");
 
