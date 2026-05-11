@@ -22,6 +22,32 @@ namespace SmartLogisticsDelieverySystem
             this.isAvailable = true;
         }
 
+        //getter
+        public double GetSpeed() 
+        {
+            return speed;
+        }
+
+        public double GetMaxCapacity()
+        {
+            return maxCapacity;
+        }
+
+        public double GetCurrentLoad()
+        {
+            return currentLoad; 
+        }
+
+        public bool GetIsAvailable()
+        {
+            return isAvailable;
+        }
+
+        public void SetSpeed(double speed)
+        {
+            this.speed = speed;
+        }
+
         public void SetCapacity(double capacity)
         {
             if (capacity <= 0)
@@ -29,6 +55,15 @@ namespace SmartLogisticsDelieverySystem
                 throw new ArgumentException("Capacity must be greater than zero.");
             }
             this.maxCapacity = capacity;
+        }
+        public void SetCurrentLoad(double currentLoad)
+        {
+            this.currentLoad = currentLoad;
+        }
+
+        public void SetIsAvailable(bool isAvailable) 
+        {
+            this.isAvailable = isAvailable;
         }
 
         public double GetRemainingCapacity()
@@ -38,29 +73,43 @@ namespace SmartLogisticsDelieverySystem
 
         public virtual double CalculateFuelEfficiency()
         {
-            return speed / maxCapacity;
+            if (speed == 0)
+            {
+                Console.WriteLine("Speed cannot be 0");
+                return 0;
+            }
+
+            return speed / currentLoad;
         }
 
         //Function for delivering packages\
         public abstract void Deliver(List<Package> packages);
-        
-        //{
-        //    //Console.WriteLine("The trucks is delivering packages.");
-
-        //    //for (int i = 0; i < packages.Count;
-        //    //    i++)
-        //    //{
-
-        //    //    int num = i;
-        //    //    Console.WriteLine("Package" + num + "is being delivered" );
-        //    //}
-
-        //    //Console.WriteLine("The package has been delivered");
-
-        //}
-
-        
 
 
-    }
+        public override void DisplayInfo()
+        {
+            Console.WriteLine("Vehicle id: " + GetId() + " , Name: "
+                + GetName() + " , Speed: " + GetSpeed() + "km/h" + " , Max Capcity :" +
+                GetMaxCapacity() + "kg" + " , Current Load: " + GetCurrentLoad() + "kg");
+        }
+
+
+            //{
+            //    //Console.WriteLine("The trucks is delivering packages.");
+
+            //    //for (int i = 0; i < packages.Count;
+            //    //    i++)
+            //    //{
+
+            //    //    int num = i;
+            //    //    Console.WriteLine("Package" + num + "is being delivered" );
+            //    //}
+
+            //    //Console.WriteLine("The package has been delivered");
+
+            //}
+
+
+
+        }
 }

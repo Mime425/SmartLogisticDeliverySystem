@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,17 +19,39 @@ namespace SmartLogisticsDelieverySystem
             this.name = name;
             this.createdDate = DateTime.Now;
         }
-        public void SetName(string name)
+        //cannot be empty
+        public int GetId()
         {
-            this.name = name;
+            return id;
         }
+            
         public string GetName()
         {
             return name;
         }
+
+        public void SetName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new InvalidDataException("Name cannot be empty");
+            }
+            this.name = name;
+        }
+
+        public void SetId(int id)
+        {
+            this.id = id;
+        }
+        public void SetCreateDate(DateTime createdDate)
+        {
+            this.createdDate = createdDate;
+        }
+
+
         public virtual bool Validate()
         {
-            return !string.IsNullOrEmpty(name);
+            return id > 0 && !string.IsNullOrEmpty(name);
         }
 
         public abstract void DisplayInfo();

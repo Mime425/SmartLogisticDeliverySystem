@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace SmartLogisticsDelieverySystem
 {
-    abstract class Drone : Vehicle
+    public class Drone : Vehicle
     {
         //attribute
         private double maxDistance;
@@ -19,6 +19,13 @@ namespace SmartLogisticsDelieverySystem
             this.maxDistance = maxDistance;
             this.smallPackages = smallPackages;
         }
+        public double GetMaxDistance() 
+        {
+            return maxDistance; 
+        }
+
+        public void SetMaxDistance(double maxDistance)
+            { this.maxDistance = maxDistance; }
 
         //Methods
 
@@ -26,31 +33,15 @@ namespace SmartLogisticsDelieverySystem
         public override void Deliver(List<Package> packages)
         {
 
-            Console.WriteLine("The drone is delivering packages");
-            
+            Console.WriteLine(GetName() + "The drone is delivering packages");
 
-            // loops through all packages
-            for (int i = 0; i < packages.Count;
-              i++)
+            foreach (Package package in packages)
             {
-                //makes number start from 0 and not 1
-                int num = i +  1;
-                Console.WriteLine("Package" + num + "is being delivered");
-            }
-            Console.WriteLine("The drone delivered all the packages");
-
-            //Condition
-            //handles packages smaller or =5
-            if (smallPackages <= 5)
-
-            {
-                Console.WriteLine("Package is being delivered by the drone");
-
-
-            }
-            else
-            {
-                Console.WriteLine("Package cannot be livered by the drone");
+                if (package.weight <=5 && package.status == "pending")
+                {
+                    package.UpdateStatus("package has been delievered.");
+                    Console.WriteLine("Drone has delivered small package: " + package.id + "to" + package.destination);
+                }
             }
 
 
@@ -60,13 +51,13 @@ namespace SmartLogisticsDelieverySystem
 
         public virtual double CalculateEfficiency() 
         {
-            //Console.WriteLine("Packages delivered based on distance");
-
-            return maxDistance;
+            return GetSpeed() + maxDistance;
 
         }
 
-        
-
+        public override void DisplayInfo()
+        {
+           //ADD console.write method ...
+        }
     }
 }

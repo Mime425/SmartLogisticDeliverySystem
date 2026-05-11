@@ -18,9 +18,13 @@
             this.status = "Pending";
         }
 
-        public Package(int id)
+        public Package(int id, double weight, int priorityLevel, string destination, string status)
         {
             this.id = id;
+            this.weight = weight;
+            this.priorityLevel = priorityLevel;
+            this.destination = destination;
+            this.status = status;
         }
 
         public double CalculatePriorityScore()

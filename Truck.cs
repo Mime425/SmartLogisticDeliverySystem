@@ -7,43 +7,38 @@ using System.Threading.Tasks;
 
 namespace OOPproject
 {
-  public  abstract class Vehicle : Entity
+  public  abstract class Truck : Vehicle
     {
-        private double speed;
-        private double maxCapacity;
-        private double currentLoad;
-        private bool isAvailable;
+        private double fuelConsumption;
 
-        public Vehicle(int id, string name, double currentLoad, double speed, double maxCapacity, bool isAvailable) : base(id, name)
+        public Truck(int id, string name, double currentLoad, double speed, double maxCapacity, bool isAvailable, double fuelConsuption) : base(id, name, currentLoad, speed, maxCapacity, isAvailable)
         {
-            this.speed = speed;
-            this.maxCapacity = maxCapacity;
-            this.currentLoad = currentLoad;
-            this.isAvailable = true;
+            this.fuelConsumption = fuelConsumption;
+           
         }
 
-        public void SetCapacity(double capacity)
+        //get
+        public double GetFuelConsumption()
         {
-            if (capacity <= 0)
+            return fuelConsumption;
+        }
+
+        public override void Deliver(List<Package> packages)
+        {
+            Console.WriteLine(GetName() + "handling heavy packages");
+            foreach (Package package in packages)
             {
-                throw new ArgumentException("Capacity must be greater than zero.");
+                if (package.isHeavy() && package.status == "pending") 
+                {
+                    package.UpdateStatus("package has been delievered.");
+                    Console.WriteLine("Truck has delivered heavy package: " +  GetId() + "to" + package.destination);
+                }
             }
-            this.maxCapacity = capacity;
         }
 
-        public double GetRemainingCapacity()
+        public override double CalculateFuelEfficiency()
         {
-            return maxCapacity - currentLoad;
-        }
-
-        public virtual double CalculateEfficiency()
-        {
-            return speed / maxCapacity;
-        }
-
-        public  void Deliver(List<Package> packages)
-        {
-
+            return base.CalculateFuelEfficiency() / fuelConsumption;
         }
     }
 }
