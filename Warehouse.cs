@@ -16,6 +16,7 @@ namespace SmartLogisticsDelieverySystem
         public Warehouse(string name)
         {
             this.name = name;
+            this.packages = new List<Package>();
 
         }
 
@@ -24,6 +25,7 @@ namespace SmartLogisticsDelieverySystem
             packages.Add(p);
         }
 
+        
 
         public void RemovePackage(Package p)
         {
@@ -66,6 +68,21 @@ namespace SmartLogisticsDelieverySystem
                 }
             }
             return bestWorker;
+        }
+
+        public List<Package> GetPendingPackages()
+        {    //array list
+            List<Package> pendingPackages = new List<Package>();
+            for (int i = 0; i < packages.Count; i++) // we initialize, then go until last pkg, then go to nxt pkg
+            {
+                if (packages[i].status == "pending")
+                {
+                    pendingPackages.Add(packages[i]); // the current pkg
+                }
+                
+            }
+            return pendingPackages;
+
         }
 
     }

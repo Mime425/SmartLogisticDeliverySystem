@@ -57,7 +57,9 @@ namespace SmartLogisticsDelieverySystem
 
         public override void DisplayInfo()
         {
-           //ADD console.write method ...
+            Console.WriteLine("Drone id:" + GetId() + "Name: " + GetName() + "Speed" + GetSpeed() + 
+                              "Max capacity" + GetMaxCapacity() + "Current load: " + GetCurrentLoad() +
+                                  "Max distance: " + GetMaxDistance());
         }
     }
 }

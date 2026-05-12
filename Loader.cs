@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace SmartLogisticsDelieverySystem
 {
-    public  abstract class Loader : Worker
+    public class Loader : Worker
     {
         private double maxLiftWeight;
 
@@ -16,11 +16,24 @@ namespace SmartLogisticsDelieverySystem
             this.maxLiftWeight = maxLiftWeight;
         }
 
+        public double GetMaxLiftWeight()
+        { 
+            return this.maxLiftWeight;
+        }
+
         public override void PerformTask()
         {
             Console.WriteLine($"{GetName} is loading packages up to {maxLiftWeight} kg");
             AddTask();
         }
+
+        public override void DisplayInfo()
+        {
+                Console.WriteLine($"Max Lift Weight: {this.maxLiftWeight}, Name: {GetName()}," +
+                    $" Loader id: {GetId}, Experience Years: {GetExperienceYears}," +
+                    $" TaskCompleted: {GetTasksCompleted}, Is Available: {GetIsAvailable} ");
+        }
+
     }
 
 }

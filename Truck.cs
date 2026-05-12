@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OOPproject
 {
-  public  abstract class Truck : Vehicle
+  public class Truck : Vehicle
     {
         private double fuelConsumption;
 

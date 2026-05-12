@@ -5,7 +5,6 @@
 
     class Program
     {
-
         static DeliverySystem deliverySystem = new DeliverySystem();
         static Stack<string> undoStack = new Stack<string>();
         static void Main(string[] args)
@@ -36,9 +35,11 @@
                         break;
                     case 2:
                         AddWorker();
+                        Console.WriteLine("Add worker not implemented yet");
                         break;
                     case 3:
                         AddVehicle();
+                        Console.WriteLine("Add Vehicle not implemented yet");
                         break;
                     case 4:
                         deliverySystem.ProcessDeliveries();
@@ -49,7 +50,7 @@
                         undoStack.Push("Sorted packages");
                         break;
                     case 6:
-                        deliverySystem.SearchPackageId();
+                        deliverySystem.SearchPackageById();
                         break;
                     case 7:
                         deliverySystem.RunSimulation();
@@ -87,10 +88,22 @@
 
         static void AddPackage()
         {
-            Console.WriteLine("Enter package ID ");
+            Console.WriteLine("Enter package ID: ");
             int id = int.Parse(Console.ReadLine());
 
-            Package package = new Package(id);
+            Console.WriteLine("Enter package weight: ");
+            double weight = double.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter priority level (1-5): ");
+            int priority = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter destination: ");
+            string destination = Console.ReadLine();    
+
+            Console.WriteLine("Enter status: ");
+            string status = Console.ReadLine();
+
+            Package package = new Package(id, weight, priority, destination, status);
             deliverySystem.AddPackage(package);
             undoStack.Push($"Added package {id}");
         }
@@ -117,7 +130,7 @@
             Console.WriteLine("Enter package ID : ");
             int id = int.Parse(Console.ReadLine());
 
-            Package package = deliverySystem.SearchPackageId(id);
+            Package package = deliverySystem.SearchPackageById(id);
             if (package != null)
             {
                 Console.WriteLine($"Package found: ID {package.id}");

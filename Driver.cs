@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace SmartLogisticsDelieverySystem
 {
-     public abstract  class Driver : Worker
+     public class Driver : Worker
     {
         private string licenseType;
 
@@ -16,10 +16,28 @@ namespace SmartLogisticsDelieverySystem
             this.licenseType = licenseType;
         }
 
+        public string GetLicenseType()
+        {
+            return licenseType;
+        }
+
+        public void SetLicenseType(string licenceType)
+        {
+            this.licenseType = licenceType; 
+        }
+
         public override void PerformTask()
         {
             Console.WriteLine($"{GetName} is delivering deliveries with a {licenseType} license");
             AddTask();
+        }
+
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Name : {GetName()}, Driver Id: {GetId()}," +
+                $"Experience years: {GetExperienceYears()}," +
+                $" Tasks completed : {GetTasksCompleted()} + IsAvailable:  {GetIsAvailable}," +
+                $" Licence type: {licenseType}"); 
         }
 
 

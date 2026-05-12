@@ -16,6 +16,8 @@ namespace SmartLogisticsDelieverySystem
         private CustomStack<Package> undoPackages = new CustomStack<Package>(20); 
         //20 is max amount that waiting and undo packages can store
 
+        private List<Worker> workers = new List<Worker>();
+        private List<Vehicle> vehicles = new List<Vehicle>();
 
         //this adds warehouse to the system
         public void AddWarehouse(Warehouse w)
@@ -32,6 +34,24 @@ namespace SmartLogisticsDelieverySystem
             waitingPackages.Enqueue(p); //add pkg enqueue
             undoPackages.Push(p); // this saves for undo in custom stack
         }
+
+        //putting packages that are pending back in the queue
+        //updating them with current list
+        public void UpdatingQueues()
+        {
+            waitingPackages.Clear();
+            undoPackages = new CustomStack<Package>(20);
+            foreach (Package p in packages)
+            {
+                if (p.status == "Pending")
+                {
+                    waitingPackages.Enqueue((Package)p);
+                }
+                undoPackages.Push(p);
+            }
+        }
+
+
 
         //next package to deliever
         public Package NextPackage()
@@ -62,11 +82,22 @@ namespace SmartLogisticsDelieverySystem
             }
             Package p =  undoPackages.Pop(); //removes the added package from the cust stack
             packages.Remove(p);   //removes that package from list of pakages
-            Console.WriteLine("We undid the package");
+            //package has been removed, now updating the waiting queue with remaining pkgs
+            waitingPackages.Clear();
+            {
+                foreach (Package pkg in packages)
+                {
+                    if (pkg.status == "Pending")
+                    {
+                        waitingPackages.Enqueue(pkg);
+                    }
+                }
+                Console.WriteLine("We undid the package");
+            }
 
         }
 
-        public Package SearchPackageId(int id) 
+        public Package SearchPackageById(int id) 
         {
             foreach (Package package in packages)
             {
@@ -91,16 +122,26 @@ namespace SmartLogisticsDelieverySystem
 
                 }
             }
+            //after sorting packages, we have to update waiting packages in queue
+            waitingPackages.Clear();
+            foreach (Package p in packages)
+            {
+                if (p.status == "Pending")
+                {
+                    waitingPackages.Enqueue(p);
+                }
+            }
         }
 
         //method that processes all packes
         // that are in waiting queue
         public void ProcessDeliveries()
         {
-            while (waitingPackages.IsEmpty())
+            while (!waitingPackages.IsEmpty())
             {
                Package p = waitingPackages.Dequeue();  // this takes the next package in the queue
-                
+                p.UpdateStatus("Delievered");
+                Console.WriteLine($"Delievered package {p.id}");
 
             }
             Console.WriteLine("Processing delivery packages");
@@ -116,19 +157,19 @@ namespace SmartLogisticsDelieverySystem
 
         }
         //methods created while trying to run our main
-        internal void SearchPackageId()
+        internal void SearchPackageById()
         {
             throw new NotImplementedException();
         }
 
         internal void AddWorker(Worker worker)
         {
-            throw new NotImplementedException();
+            workers.Add(worker);
         }
 
         internal void AddVehicle(Vehicle vehicle)
         {
-            throw new NotImplementedException();
+            vehicles.Add(vehicle);
         }
     }
 }

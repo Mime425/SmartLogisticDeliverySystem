@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace SmartLogisticsDelieverySystem
 {
-     abstract class Manager : Worker
+     public class Manager : Worker
     {
         private int teamSize;
 
@@ -16,13 +16,18 @@ namespace SmartLogisticsDelieverySystem
             this.teamSize = teamSize;
         }
 
+        public int getTeamSize()
+        {
+            return teamSize;    
+        }
+
         public override void PerformTask()
         {
             Console.WriteLine($"{GetName} is assigning tasks to their team of {teamSize} members");
             AddTask();
         }
 
-        Worker FindBestWorker(List<Worker> workers)
+        public Worker FindBestWorker(List<Worker> workers)
         {
             Worker bestWorker = workers[0];
 
@@ -35,6 +40,15 @@ namespace SmartLogisticsDelieverySystem
             }
             return bestWorker;
         }
+
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Name : {GetName()}, Manager Id: {GetId()}," +
+                $"Experience years: {GetExperienceYears()}," +
+                $" Tasks completed : {GetTasksCompleted()} + IsAvailable:  {GetIsAvailable}," + "Performance:" +
+                 CalculatePerformance());
+        }
+
     }
 
 }
