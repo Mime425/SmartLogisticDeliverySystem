@@ -1,7 +1,6 @@
 ﻿namespace SmartLogisticsDelieverySystem
 {
     public class Package
-
     {
         public double weight { get; set; }
         public int id { get; set; }

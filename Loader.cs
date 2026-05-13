@@ -11,7 +11,7 @@ namespace SmartLogisticsDelieverySystem
     {
         private double maxLiftWeight;
 
-        protected Loader(double maxLiftWeight, string name, int id, int experienceYears, int taskCompleted, bool isAvailable) : base(name, id, experienceYears, taskCompleted, isAvailable)
+        public Loader(double maxLiftWeight, string name, int id, int experienceYears, int taskCompleted, bool isAvailable) : base(name, id, experienceYears, taskCompleted, isAvailable)
         {
             this.maxLiftWeight = maxLiftWeight;
         }

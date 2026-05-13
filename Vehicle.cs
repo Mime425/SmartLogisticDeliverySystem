@@ -82,7 +82,7 @@ namespace SmartLogisticsDelieverySystem
             return speed / currentLoad;
         }
 
-        //Function for delivering packages\
+        //Function for delivering packages
         public abstract void Deliver(List<Package> packages);
 
 

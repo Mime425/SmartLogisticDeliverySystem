@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPproject
+namespace SmartLogisticsDelieverySystem
 {
   public class Truck : Vehicle
     {

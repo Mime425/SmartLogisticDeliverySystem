@@ -48,7 +48,6 @@ namespace SmartLogisticsDelieverySystem
         }
 
         //Calculate efficiency method
-
         public virtual double CalculateEfficiency() 
         {
             return GetSpeed() + maxDistance;

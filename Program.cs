@@ -1,7 +1,7 @@
 ﻿namespace SmartLogisticsDelieverySystem
 {
     using SmartLogisticsDelieverySystem;
-    using System.Text.Json;
+    using System.ComponentModel.Design;
 
     class Program
     {
@@ -13,16 +13,14 @@
             do
             {
                 Console.WriteLine("\n =====DELIVERY SYSTEM MENU=====");
-                Console.WriteLine("1. Add Package");
-                Console.WriteLine("2. Add Worker");
-                Console.WriteLine("3. Add Vehicle");
-                Console.WriteLine("4. Assign Deliveries");
-                Console.WriteLine("5. Sort Packages");
-                Console.WriteLine("6. Search Package");
-                Console.WriteLine("7. Run simulation");
-                Console.WriteLine("8. Undo");
-                Console.WriteLine("9. Save");
-                Console.WriteLine("10. Load");
+                Console.WriteLine("1. Add entities");
+                Console.WriteLine("2. Assign Deliveries");
+                Console.WriteLine("3. Sort Packages");
+                Console.WriteLine("4. Search Package");
+                Console.WriteLine("5. Run simulation");
+                Console.WriteLine("6. Undo");
+                Console.WriteLine("7. Save");
+                Console.WriteLine("8. Load");
                 Console.WriteLine("0. Exit");
                 Console.WriteLine("Enter your choice: ");
 
@@ -31,60 +29,167 @@
                 switch (choice)
                 {
                     case 1:
-                        AddPackage();
+                        AddEntities();
                         break;
+
                     case 2:
-                        AddWorker();
-                        Console.WriteLine("Add worker not implemented yet");
-                        break;
-                    case 3:
-                        AddVehicle();
-                        Console.WriteLine("Add Vehicle not implemented yet");
-                        break;
-                    case 4:
                         deliverySystem.ProcessDeliveries();
                         undoStack.Push("Assigned deliveries");
                         break;
-                    case 5:
+                    case 3:
                         deliverySystem.SortPackage();
                         undoStack.Push("Sorted packages");
                         break;
-                    case 6:
-                        deliverySystem.SearchPackageById();
+                    case 4:
+                        SearchPackage();
+
                         break;
-                    case 7:
+                    case 5:
                         deliverySystem.RunSimulation();
                         undoStack.Push("Ran simulation");
                         break;
-                    case 8:
+                    case 6:
                         Undo();
 
                         break;
-                    case 9:
+                    case 7:
                         Save();
                         break;
-                    case 10:
+                    case 8:
                         Load();
                         break;
                 }
-                
+
             } while (choice != 0);
         }
 
-        private static void Load()
+        //making a method for seperate menu
+        static void AddEntities()
         {
-            throw new NotImplementedException();
+            int choice;
+
+            Console.WriteLine("--- Add Entities --- ");
+            Console.WriteLine("1. Add Package");
+            Console.WriteLine("2. Add Worker");
+            Console.WriteLine("3. Add Vehicle");
+            Console.WriteLine("4. Back to menu");
+
+            choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    AddPackage();
+                    break;
+                case 2:
+                    AddWorker();
+                    break;
+                case 3:
+                    AddVehicle();
+                    Console.WriteLine("Add Vehicle not implemented yet");
+                    break;
+
+                case 4:
+                    Console.WriteLine("Going back to menu");
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice");
+                    break;
+
+            }
+
         }
 
-        private static void Save()
+        static void AddWorker()
         {
-            throw new NotImplementedException();
+            int workerChoice;
+
+            Console.WriteLine("---Add Worker---");
+            Console.WriteLine("1. Driver");
+            Console.WriteLine("2. Manager");
+            Console.WriteLine("3. Loader");
+            workerChoice = int.Parse(Console.ReadLine());
+
+
+            if (workerChoice == 1)
+            {
+                Console.WriteLine("Enter worker name: ");
+                string name = Console.ReadLine();
+
+                Console.WriteLine("Enter worker id: ");
+                int id = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Experience Years: ");
+                int experienceYears = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Task completed: ");
+                int taskCompleted = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Is available:");
+                bool isAvailable = false;
+
+                Console.WriteLine("Licence type: ");
+                string licenceType = Console.ReadLine();
+
+                Driver d = new Driver(name, id, experienceYears, taskCompleted, isAvailable, licenceType);
+                deliverySystem.AddWorker(d);
+                Console.WriteLine("Driver has been added");
+            }
+
+            else if (workerChoice == 2)
+            {
+                Console.WriteLine("Enter worker name: ");
+                string name = Console.ReadLine();
+
+                Console.WriteLine("Enter worker id: ");
+                int id = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Experience Years:");
+                int experienceYears = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Task completed:");
+                int taskCompleted = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Is available:");
+                bool isAvailable = false;
+
+                Console.WriteLine("Team size :");
+                int teamSize = int.Parse(Console.ReadLine());
+
+                Manager m = new Manager(teamSize, name, id, experienceYears, taskCompleted, isAvailable);
+                deliverySystem.AddWorker(m);
+                Console.WriteLine("Manager has been added");
+
+            }
+            else if (workerChoice == 3)
+            {
+                Console.WriteLine("Enter worker name");
+                string name = Console.ReadLine();
+
+                Console.WriteLine("Enter worker id");
+                int id = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Experience Years:");
+                int experienceYears = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Task completed:");
+                int taskCompleted = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Is available:");
+                bool isAvailable = false;
+
+                Console.WriteLine("Max Lifting weight: ");
+                double maxLiftWeight = double.Parse(Console.ReadLine());
+
+                Loader l = new Loader(maxLiftWeight,  name,  id,  experienceYears,  taskCompleted,  isAvailable);
+                deliverySystem.AddWorker(l);
+                Console.WriteLine("Loader has been added");
+
+            }
+
         }
 
-        private static void Undo()
-        {
-            throw new NotImplementedException();
-        }
+
 
         static void AddPackage()
         {
@@ -107,19 +212,54 @@
             deliverySystem.AddPackage(package);
             undoStack.Push($"Added package {id}");
         }
-        static void AddWorker()
-        {
-            Console.WriteLine("Enter worker Name ");
-            string name = Console.ReadLine();
+        //static void AddWorker()
+        //{
+        //    Console.WriteLine("Enter worker Name ");
+        //    string name = Console.ReadLine();
 
-            //Worker worker = new Worker(name);
-            //deliverySystem.AddWorker(worker);
-            //undoStack.Push($"Added worker {name}");
-        }
+        //    //Worker worker = new Worker(name);
+        //    //deliverySystem.AddWorker(worker);
+        //    //undoStack.Push($"Added worker {name}");
+        //}
         static void AddVehicle()
         {
-            Console.WriteLine("Enter vehicle Capacity ");
-            int capacity = int.Parse(Console.ReadLine());
+            int vehicleChoice;
+
+            Console.WriteLine("---Add Vehicle---");
+            Console.WriteLine("1. Truck");
+            Console.WriteLine("2. Van");
+            Console.WriteLine("3. Drone");
+            vehicleChoice = int.Parse(Console.ReadLine());
+
+            if (vehicleChoice == 1)
+            {
+
+                Console.WriteLine("Vehicle id: ");
+                int id = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Vehicle name: ");
+                string name = Console.ReadLine();
+
+                Console.WriteLine("CurrentLoad: ");
+                double currentLoad = double.Parse(Console.ReadLine());
+
+                Console.WriteLine("Current speed: ");
+                double speed  = double.Parse(Console.ReadLine());
+
+                Console.WriteLine("Max capacity: ");
+                double maxCapacity = double.Parse(Console.ReadLine());
+
+                Console.WriteLine("Is Available: ");
+                bool isAvailable = false;
+
+                Console.WriteLine("Fuel consumption");
+                double fuelConsumption = double.Parse(Console.ReadLine());  
+
+                Truck t = new Truck( id, name,  currentLoad,  speed,  maxCapacity,  isAvailable, fuelConsumption);
+                deliverySystem.AddVehicle(t);
+                Console.WriteLine("Truck has been added");
+            }
+            //tommorow add IF Van is selected so else if , also 3 if drone is selected
 
             //Vehicle vehicle = new Vehicle(capacity);
             //deliverySystem.AddVehicle(vehicle);
@@ -138,29 +278,84 @@
             else
             {
                 Console.WriteLine("Package not found.");
-            }
-            static void Undo()
+            } 
+        }
+        //Undo keeps track of actions that happen 
+        static void Undo()
+        {
+            if (undoStack.Count > 0)
             {
-                if (undoStack.Count > 0)
-                    Console.WriteLine($"Undo: {undoStack.Pop()}");
-                else
-                    Console.WriteLine("Nothing to undo.");
-            }
-            static void Save()
-            {
-                string json = System.Text.Json.JsonSerializer.Serialize(deliverySystem);
-                File.WriteAllText("deliverySystem.json", json);
-                Console.WriteLine("Delivery system saved.");
-            }
-            static void Load()
-            {
-                if (File.Exists("deliverySystem.json"))
+                string action = undoStack.Pop();
+                Console.WriteLine("Undo: " + action);
+                if (action == "package")
                 {
-                    string json = File.ReadAllText("deliverySystem.json");
-                    deliverySystem = JsonSerializer.Deserialize<DeliverySystem>(json);
-                    Console.WriteLine("Delivery system loaded.");
+                    deliverySystem.UndoPackage();
+
                 }
+            }
+            else 
+            {
+                Console.WriteLine("Nothing to undo.");
+            }
+        }
+
+        static void Save()
+        {
+            try
+            {
+                StreamWriter sw = new StreamWriter("deliverySystem.txt");
+                sw.WriteLine("Packages");
+                foreach (Package p in deliverySystem.Packages) // from delivery system
+                {
+                    sw.WriteLine($"{p.id}|{p.weight}|{p.priorityLevel}|{p.destination}|{p.status}");
+                }
+                sw.Close();
+                Console.WriteLine("Delivery system saved.");
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: " + e.Message);
+            }
+        }
+        static void Load()
+        {
+            if (!File.Exists("deliverySystem.txt")) //checks if it exits
+            {
+                Console.WriteLine("No save file was found.");
+                return;
+                
+            }
+            try 
+            {
+                StreamReader sr = new StreamReader("deliverySystem.txt"); //acutally use it 
+                deliverySystem = new DeliverySystem();
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (line != "Packages")
+                    {
+                        string[] parts = line.Split('|');
+                        if (parts.Length != 5)
+                        { continue; }
+                        int id = int.Parse(parts[0]);
+                        double weight = double.Parse(parts[1]);
+                        int priorityLevel = int.Parse(parts[2]);
+                        string destination = parts[3];
+                        string status = parts[4];
+                        Package p = new Package(weight, id, priorityLevel, destination, status);
+                        deliverySystem.AddPackage(p);
+                    }
+                }
+                sr.Close();
+                Console.WriteLine("Delivery system loaded.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: " + e.Message);
             }
         }
     }
+
 }
+       

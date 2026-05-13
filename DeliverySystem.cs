@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartLogisticsDelieverySystem
 {
-    public class DeliverySystem
+    public class DeliverySystem 
     {
         private List<Warehouse> warehouses = new List<Warehouse>();
         private List<Package> packages = new List<Package>();
@@ -18,6 +18,16 @@ namespace SmartLogisticsDelieverySystem
 
         private List<Worker> workers = new List<Worker>();
         private List<Vehicle> vehicles = new List<Vehicle>();
+
+        //We need to access delivery system
+        // we use public here to access it in Save()
+        public List<Package> Packages 
+        {
+            get
+            {
+                return packages; 
+            }
+        }
 
         //this adds warehouse to the system
         public void AddWarehouse(Warehouse w)
@@ -97,7 +107,7 @@ namespace SmartLogisticsDelieverySystem
 
         }
 
-        public Package SearchPackageById(int id) 
+        public Package? SearchPackageById(int id)   // could be a package or not
         {
             foreach (Package package in packages)
             {
@@ -157,10 +167,6 @@ namespace SmartLogisticsDelieverySystem
 
         }
         //methods created while trying to run our main
-        internal void SearchPackageById()
-        {
-            throw new NotImplementedException();
-        }
 
         internal void AddWorker(Worker worker)
         {

@@ -25,8 +25,7 @@ namespace SmartLogisticsDelieverySystem
             packages.Add(p);
         }
 
-        
-
+     
         public void RemovePackage(Package p)
         {
             packages.Remove(p);
