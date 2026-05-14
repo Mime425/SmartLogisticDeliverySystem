@@ -59,7 +59,7 @@ namespace SmartLogisticsDelieverySystem
             {
                 myarray[i - 1] = myarray[i];  //moves every item 1 position on left
             }
-            myarray[count - 1] = default(T);   //Clear the last element
+            myarray[count - 1] = default;   //Clear the last element
             count--;           
             return item;
         }

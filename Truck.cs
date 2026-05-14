@@ -11,7 +11,7 @@ namespace SmartLogisticsDelieverySystem
     {
         private double fuelConsumption;
 
-        public Truck(int id, string name, double currentLoad, double speed, double maxCapacity, bool isAvailable, double fuelConsuption) : base(id, name, currentLoad, speed, maxCapacity, isAvailable)
+        public Truck(int id, string name, double currentLoad, double speed, double maxCapacity, bool isAvailable, double fuelConsumption) : base(id, name, currentLoad, speed, maxCapacity, isAvailable)
         {
             this.fuelConsumption = fuelConsumption;
            

@@ -8,25 +8,14 @@
         public string destination { get; set; }
         public string status { get; set; }
 
-        public Package(double weight, int id, int priorityLevel, string destination, string status)
-        {
-            this.weight = weight;
-            this.id = id;
-            this.priorityLevel = Math.Clamp(priorityLevel, 1, 5);
-            this.destination = destination;
-            this.status = "Pending";
-        }
-
         public Package(int id, double weight, int priorityLevel, string destination, string status)
         {
             this.id = id;
             this.weight = weight;
-            this.priorityLevel = priorityLevel;
+            this.priorityLevel = Math.Clamp(priorityLevel, 1, 5);
             this.destination = destination;
             this.status = status;
         }
-
-       
 
         public double CalculatePriorityScore()
         {

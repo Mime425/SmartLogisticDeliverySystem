@@ -53,7 +53,7 @@ namespace SmartLogisticsDelieverySystem
 
             {
                 Console.WriteLine("Stack is empty");
-                return default(T);
+                return default;        
             }
             T value = arr[top];  //gets top value 
             top--;
@@ -69,7 +69,7 @@ namespace SmartLogisticsDelieverySystem
             if (IsEmpty())
             {
                 Console.WriteLine("Stack is empty");
-                return default(T);
+                return default; 
             }
             return arr[top];
         }

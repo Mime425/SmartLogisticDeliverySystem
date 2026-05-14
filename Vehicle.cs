@@ -93,23 +93,5 @@ namespace SmartLogisticsDelieverySystem
                 GetMaxCapacity() + "kg" + " , Current Load: " + GetCurrentLoad() + "kg");
         }
 
-
-            //{
-            //    //Console.WriteLine("The trucks is delivering packages.");
-
-            //    //for (int i = 0; i < packages.Count;
-            //    //    i++)
-            //    //{
-
-            //    //    int num = i;
-            //    //    Console.WriteLine("Package" + num + "is being delivered" );
-            //    //}
-
-            //    //Console.WriteLine("The package has been delivered");
-
-            //}
-
-
-
-        }
+    }
 }

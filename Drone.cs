@@ -14,7 +14,7 @@ namespace SmartLogisticsDelieverySystem
         private int smallPackages;
 
         //constructor
-        public Drone(int id, string name, double currentLoad, double speed, double maxCapacity, bool isAvailable, int smallPackages) : base(id, name, currentLoad, speed, maxCapacity, isAvailable)
+        public Drone(int id, string name, double currentLoad, double speed, double maxCapacity, bool isAvailable, int smallPackages, double maxDistance) : base(id, name, currentLoad, speed, maxCapacity, isAvailable)
         {
             this.maxDistance = maxDistance;
             this.smallPackages = smallPackages;
@@ -43,7 +43,6 @@ namespace SmartLogisticsDelieverySystem
                     Console.WriteLine("Drone has delivered small package: " + package.id + "to" + package.destination);
                 }
             }
-
 
         }
 

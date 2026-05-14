@@ -12,7 +12,7 @@ namespace SmartLogisticsDelieverySystem
         private bool isElectric;
 
         // constructor
-        public Van(int id, string name, double currentLoad, double speed, double maxCapacity, bool isAvailable, bool isEletric) : base(id, name, currentLoad, speed, maxCapacity, isAvailable)
+        public Van(int id, string name, double currentLoad, double speed, double maxCapacity, bool isAvailable, bool isElectric) : base(id, name, currentLoad, speed, maxCapacity, isAvailable)
         {
             this.isElectric = isElectric;
 

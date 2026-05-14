@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartLogisticsDelieverySystem
 {
-    public class DeliverySystem 
+    public class DeliverySystem
     {
         private List<Warehouse> warehouses = new List<Warehouse>();
         private List<Package> packages = new List<Package>();
@@ -55,7 +55,7 @@ namespace SmartLogisticsDelieverySystem
             {
                 if (p.status == "Pending")
                 {
-                    waitingPackages.Enqueue((Package)p);
+                    waitingPackages.Enqueue(p);     //package
                 }
                 undoPackages.Push(p);
             }
@@ -107,7 +107,7 @@ namespace SmartLogisticsDelieverySystem
 
         }
 
-        public Package? SearchPackageById(int id)   // could be a package or not
+        public Package SearchPackageById(int id)  
         {
             foreach (Package package in packages)
             {
